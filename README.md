@@ -1,0 +1,2 @@
+# Open-Source-Digital-Health-Informatics-Framework-Patient-Led-Speech-Disfluency-Nutritional-Tracking
+An open-source Power BI dashboard for individuals who stutter (developmental speech disfluency). This repository provides a dual-table tracking system and an interactive dashboard to analyze how morning nutritional regimens, baseline anxiety, and sleep duration correlate with speech disfluency severity and physical blockage durations.
