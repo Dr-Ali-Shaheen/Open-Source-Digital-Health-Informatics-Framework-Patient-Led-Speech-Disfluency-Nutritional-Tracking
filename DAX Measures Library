@@ -1,0 +1,76 @@
+Add these DAX formulas into a dedicated blank measure table (e.g., `_Measures`) inside Power BI:
+
+Code snippet
+
+// ==========================================
+// 1. BASELINE AGGREGATIONS
+// ==========================================
+Avg Severity Score = 
+AVERAGE('Daily_Tracking_Log'[Severity_Score])
+
+Avg Anxiety Baseline = 
+AVERAGE('Daily_Tracking_Log'[Anxiety_Baseline])
+
+Avg Sleep Hours = 
+AVERAGE('Daily_Tracking_Log'[Sleep_Hours])
+
+Total Logged Days = 
+COUNTROWS('Daily_Tracking_Log')
+
+// ==========================================
+// 2. NUTRITIONAL REGIMEN & EFFICACY METRICS
+// ==========================================
+Adherence Rate (%) = 
+DIVIDE(
+    CALCULATE(COUNTROWS('Daily_Tracking_Log'), 'Daily_Tracking_Log'[Regimen_Adherence] = 1),
+    [Total Logged Days],
+    0
+)
+
+Avg Severity (Adherent) = 
+CALCULATE(
+    AVERAGE('Daily_Tracking_Log'[Severity_Score]),
+    'Daily_Tracking_Log'[Regimen_Adherence] = 1
+)
+
+Avg Severity (Non-Adherent) = 
+CALCULATE(
+    AVERAGE('Daily_Tracking_Log'[Severity_Score]),
+    'Daily_Tracking_Log'[Regimen_Adherence] = 0
+)
+
+Supplement Efficacy Delta = 
+[Avg Severity (Non-Adherent)] - [Avg Severity (Adherent)]
+
+// ==========================================
+// 3. MOVING AVERAGES & SLEEP COLUMNS
+// ==========================================
+7-Day Rolling Avg Severity = 
+AVERAGEX(
+    DATESINPERIOD('DateTable'[Date], MAX('DateTable'[Date]), -7, DAY),
+    CALCULATE(AVERAGE('Daily_Tracking_Log'[Severity_Score]))
+)
+
+7-Day Rolling Avg Anxiety = 
+AVERAGEX(
+    DATESINPERIOD('DateTable'[Date], MAX('DateTable'[Date]), -7, DAY),
+    CALCULATE(AVERAGE('Daily_Tracking_Log'[Anxiety_Baseline]))
+)
+
+// Calculated Column on Daily_Tracking_Log Table
+Sleep Bracket = 
+IF(
+    'Daily_Tracking_Log'[Sleep_Hours] < 6.5, 
+    "Low Sleep (<6.5h)", 
+    "Adequate Sleep (>=6.5h)"
+)
+
+// ==========================================
+// 4. EVENT METRICS
+// ==========================================
+Total Disfluency Events = 
+COUNTROWS('Disfluency_Events_Log')
+
+Avg Block Duration Sec = 
+AVERAGE('Disfluency_Events_Log'[Block_Duration_Sec])
+
