@@ -1,0 +1,40 @@
+🛠️ Step-by-Step Setup Guide
+
+### 1. Google Sheets / Excel Setup
+
+1. Create a spreadsheet named **`Stammering Tracking Log`** with two tabs: `Daily_Tracking_Log` and `Disfluency_Events_Log`.
+    
+2. Apply Data Validation rules:
+    
+    - `Severity_Score` & `Anxiety_Baseline`: Whole number `1` to `10`.
+        
+    - `Regimen_Adherence`: List `1, 0`.
+        
+    - `Event_Type`: Dropdown `Block, Prolongation, Repetition`.
+        
+
+### 2. Power BI Data Connection & Modeling
+
+1. Open Power BI Desktop, select **Get Data** > **Google Sheets** (or **Excel**), and enter your sheet URL.
+    
+2. Select both tables (`Daily_Tracking_Log` and `Disfluency_Events_Log`) and click **Transform Data**.
+    
+3. In Power Query:
+    
+    - Verify `Date` columns are set to **Date** type.
+        
+    - Verify numerical metrics are set to **Whole Number** or **Decimal Number**.
+        
+4. Go to **Model View** and establish a 1-to-Many single-direction relationship:
+    
+    - `Daily_Tracking_Log[Date]` $\rightarrow$ `Disfluency_Events_Log[Date]`
+        
+5. Create a dedicated `DateTable` using DAX:
+    
+    Code snippet
+    
+    ```
+    DateTable = CALENDAR(MIN('Daily_Tracking_Log'[Date]), MAX('Daily_Tracking_Log'[Date]))
+    ```
+    
+    Relate `DateTable[Date]` 1-to-Many to `Daily_Tracking_Log[Date]`.
