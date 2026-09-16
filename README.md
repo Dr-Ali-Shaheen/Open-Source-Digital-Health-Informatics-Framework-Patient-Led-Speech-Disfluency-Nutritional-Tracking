@@ -1,4 +1,4 @@
-# Open-Source-Digital-Health-Informatics-Framework-Patient-Led-Speech-Disfluency-Nutritional-Tracking
+<img width="1920" height="1080" alt="Beige and Brown Minimalist Creative Portfolio Presentation" src="https://github.com/user-attachments/assets/51548db9-3355-4df3-a7fd-e278ea9cca01" /># Open-Source-Digital-Health-Informatics-Framework-Patient-Led-Speech-Disfluency-Nutritional-Tracking
 An open-source Power BI dashboard for individuals who stutter (developmental speech disfluency). This repository provides a dual-table tracking system and an interactive dashboard to analyze how morning nutritional regimens, baseline anxiety, and sleep duration correlate with speech disfluency severity and physical blockage durations.
 
 <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/96223a5f-4405-4d31-b606-c188321dd36c" />
@@ -21,6 +21,9 @@ _Logged nightly before sleeping (except `Sleep_Hours` and `Regimen_Adherence`)._
 |**`Regimen_Adherence`**|Binary|`1` or `0`|Compliance flag for morning supplement protocol (Sulbutiamine, Vitamin B1, Creatine taken at breakfast). (`1` = Full regimen met; `0` = Regimen missed).|
 |**`Speech_Context`**|Text|Categorical|Primary or most challenging speaking situation encountered during the day (e.g., _Work Presentation_, _Phone Call_, _Casual Conversation_, _Low Social Interaction_).|
 |**`Notes`**|Text|Free text|Qualitative observational context (e.g., _Felt well-rested_, _Rush morning_).|
+
+<img width="1920" height="1080" alt="Beige and Brown Minimalist Creative Portfolio Presentation" src="https://github.com/user-attachments/assets/83ba0d73-2102-4131-a589-4e317e35ca85" />
+
 
 ### 2. `Disfluency_Events_Log` (Dimension Table)
 
